@@ -1,22 +1,15 @@
 <?php
-/**
- * Short description for test.php
- *
- * @package test
- * @author gabbar1947 <gabbar1947@Rathore1947>
- * @version 0.1
- * @copyright (C) 2016 gabbar1947 <gabbar1947@Rathore1947>
- * @license MIT
- */
-    
-class UserCest
-{
-    public function error404check(AcceptanceTester $I, page\Dashboard $dashpage)
+class ArtCest
+{    
+    function articletest(AcceptanceTester $I, \Page\Article $artpage)
     {
-        $dashpage->view();
-        $I->wantTo('check 404 error');
-        $I->amOnPage('/dummy');
-        $I->see('404 error not found');
+        $h1 = "first article"; 
+        $sub = "firstart";
+        $matter = "this is my first joomla article";
+
+        $artpage->createarticle($h1, $sub, $matter);
+        $I->amOnPage('/index.php?option=com_content&view=articles');
+        $I->see('Article successfully saved', 'h1');        
     }
 }
 ?>

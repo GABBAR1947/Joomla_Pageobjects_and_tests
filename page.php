@@ -1,38 +1,33 @@
 <?php
-/**
- * Short description for page.php
- *
- * @package page
- * @author gabbar1947 <gabbar1947@Rathore1947>
- * @version 0.1
- * @copyright (C) 2016 gabbar1947 <gabbar1947@Rathore1947>
- * @license MIT
- */
+namespace Page;
 
-    namespace page;
-    use Codeception\Util\Shared\Asserts;
-    use "base class";
+class Article
+{
 
-    class Dashboard
+    public tobject;
+
+    public $URL = '/index.php?option=com_content&view=article&layout=edit';
+    public $title = 'input from the form';
+    public $alias = 'input from the form';
+    public $saveClose = 'input from the form';
+    public $content = 'input from the form';
+   
+    public function __construct(\AcceptanceTester $I)
     {
-        public $tobject; 
-
-        public $url = '/administrator';
-            
-        public function __construct(\AcceptanceTester $I)
-        {
-            this->tobject = $I;
-        }
-
-        public function view()
-        {
-            $I = this->tobject;
-
-            $I->amOnPage(self::$url);
-
-            return $this;
-        }
-
+        $this->tobject = $I;
     }
-    
+
+    public function createarticle($head, $aka, $text)
+    {
+        $I = $this->tobject;
+
+        $I->amOnPage(self::$URL);
+        $I->fillField(self::$title, $head);
+        $I->fillField(self::$alias, $aka);
+        $I->fillField(self::$content, $text);
+        $I->click(self::$saveClose);
+
+        return $this;
+    }    
+}
 ?>
